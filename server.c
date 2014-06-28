@@ -5,7 +5,8 @@
  *   known "millionaers server" originally written by
  *   Ludwig Frank and continuously improved by Klaus
  *   Voggenauer. It is a complete rewrite based on a mealy 
- *   state automaton which i used for my purposes. 
+ *   state automaton which i used for implementing the 
+ *   protocol logic. 
  *	Notes: This version tries to catch up all potential
  *    errors produced by the common socket systemcalls,
  *    although this program assumes that a send call 
@@ -29,6 +30,19 @@
 #define BINDPORT "3548"
 
 #define WON "WON\n"
+
+/* Some specifications for the used protocol 
+	Note: Two newline characters terminate a question. 
+
+	Protocol Commands:
+	command			|
+	----------------+------------------------
+	"CNT\n"			| used do initiate a session 
+	"OK\n"			| acknoledgement message from server
+	"NOK\n"			| client lost
+	"1\n".."15\n"	| client request for question n
+	"WON\n"			| client won. session over
+	"A\n".."B\n"	| client chooses answer a, b, c, or d */
 
 #define QST1  "Die 50-Euro-Frage:\nWelcher Begriff beschreibt eine Betriebssystemschnittstelle?\n"\
 				"A: Posix32		B: Win32\nC: Winner_16	D: Looser_8\n\n"
